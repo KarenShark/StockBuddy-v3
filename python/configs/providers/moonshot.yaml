@@ -1,0 +1,41 @@
+# ============================================
+# Moonshot (月之暗面) Provider Configuration
+# ============================================
+name: "Moonshot"
+provider_type: "openai-compatible"
+
+enabled: true
+
+# Connection Configuration
+connection:
+  base_url: "https://api.moonshot.cn/v1"
+  api_key_env: "MOONSHOT_API_KEY"
+
+# Default model if none specified
+default_model: "moonshot-v1-8k"
+
+# Model Parameters Defaults
+defaults:
+  temperature: 0.7
+  max_tokens: 4096
+
+# Available Models
+models:
+  - id: "moonshot-v1-8k"
+    name: "Moonshot V1 8K"
+    description: "高性价比，适合日常对话"
+    context_length: 8192
+
+  - id: "moonshot-v1-32k"
+    name: "Moonshot V1 32K"
+    description: "长文本处理"
+    context_length: 32768
+
+  - id: "moonshot-v1-128k"
+    name: "Moonshot V1 128K"
+    description: "超长文本处理"
+    context_length: 131072
+
+# Note: Moonshot 是国内服务商，无需 VPN
+# 优势：低延迟、价格便宜、中文能力强
+

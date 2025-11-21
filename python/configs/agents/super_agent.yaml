@@ -1,0 +1,75 @@
+# ============================================
+# Super Agent Configuration
+# ============================================
+# The Super Agent acts as the orchestration layer that:
+# - Triages user intent before planning
+# - Decides whether to answer directly or handoff to Planner
+# - Provides initial query enrichment and context gathering
+# ============================================
+# Configuration Priority (highest to lowest):
+# 1. Environment Variables (highest priority)
+# 2. .env file 
+# 3. YAML files (lowest priority, system defaults)
+# ============================================
+
+name: "Super Agent"
+enabled: true
+
+# Model Configuration
+# Super Agent typically needs a capable reasoning model
+models:
+  # Primary model for triage, reasoning, and query enrichment
+  primary:
+    model_id: "openai/gpt-5-mini-2025-08-07"  # OpenRouter format: provider/model-name
+    provider: "openrouter"  # Use OpenRouter for better model selection and unified API
+    
+    # Model parameters (can be overridden by environment variables)
+    parameters:
+      # temperature: 0.7  # gpt-5-mini doesn't support custom temperature, only default (1)
+      max_completion_tokens: 2048  # GPT-5 uses max_completion_tokens instead of max_tokens
+    
+    # Provider-specific model mappings for fallback
+    # Used when primary provider fails and fallback is attempted
+    provider_models:
+      siliconflow: "deepseek-ai/DeepSeek-V3.1-Terminus"  # Similar capability to Claude Haiku
+      google: "gemini-2.5-flash"  # Fast and efficient like Claude Haiku
+
+# Environment Variable Overrides
+# Format: ENV_VAR_NAME -> config.path
+# These allow runtime configuration through environment variables
+env_overrides:
+  # Primary model overrides
+  PLANNER_MODEL_ID: "models.primary.model_id"
+  SUPER_AGENT_MODEL_ID: "models.primary.model_id"  # Alias for clarity
+  SUPER_AGENT_PROVIDER: "models.primary.provider"
+  SUPER_AGENT_TEMPERATURE: "models.primary.parameters.temperature"
+  SUPER_AGENT_MAX_COMPLETION_TOKENS: "models.primary.parameters.max_completion_tokens"
+  SUPER_AGENT_MAX_TOKENS: "models.primary.parameters.max_tokens"  # Legacy support
+
+# Super Agent Capabilities
+capabilities:
+  # Enable web search for context enrichment
+  web_search: true
+  
+  # Enable crawling capabilities
+  web_crawl: true
+  
+  # Session management
+  session_management:
+    enabled: true
+    max_history_runs: 5
+    enable_summaries: true
+
+# Advanced Settings
+advanced:
+  # Debug mode (can be overridden by AGENT_DEBUG_MODE env var)
+  debug_mode: false
+
+  # Output format
+  markdown: false
+  
+  # Context settings
+  add_datetime_to_context: true
+  add_history_to_context: true
+  read_chat_history: true
+

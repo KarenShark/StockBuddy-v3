@@ -1,0 +1,4 @@
+---
+description: 不要动不动就写md文件, 而是把这些修改记录和遇到的问题, 解决的问题, 我提出的query给记录到一个固定的log文件中 - development log中, 方便我后续review, 在一个文件里就可以, 每次添加内容都在这个文件, 然后标注好、分点往后添加, 标注好时间和改动的主题
+alwaysApply: false
+---

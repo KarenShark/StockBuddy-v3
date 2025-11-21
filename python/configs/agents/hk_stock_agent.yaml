@@ -1,0 +1,162 @@
+# ============================================
+# HK Stock Trading Agent Configuration
+# ============================================
+# The HK Stock Agent specializes in Hong Kong stock market analysis and trading.
+# It provides real-time price monitoring, technical analysis, and paper trading simulation.
+# ============================================
+# Configuration Priority (highest to lowest):
+# 1. Environment Variables (highest priority)
+# 2. .env file
+# 3. YAML files (lowest priority, system defaults)
+# ============================================
+
+name: "HK Stock Agent"
+enabled: true
+
+# Model Configuration
+# HK Stock Agent needs a capable model for market analysis and trading decisions
+models:
+  # Primary model for stock analysis and trading
+  primary:
+    model_id: "google/gemini-2.5-pro"
+    provider: "openrouter"  # Must explicitly specify provider (not null)
+
+    # Provider-specific model mappings for fallback
+    provider_models:
+      siliconflow: "Qwen/Qwen3-235B-A22B-Thinking-2507"  # Strong reasoning for market analysis
+      google: "gemini-2.5-flash"  # Fast and efficient
+      openai: "gpt-4o"  # Alternative high-quality model
+
+    parameters:
+      # temperature: 0.4  # Moderate temperature for balanced analysis
+      # max_tokens: 4096  # Sufficient for comprehensive analysis
+
+# Environment Variable Overrides
+# Format: ENV_VAR_NAME -> config.path
+env_overrides:
+  # Primary model overrides
+  HK_STOCK_AGENT_MODEL_ID: "models.primary.model_id"
+  HK_STOCK_AGENT_PROVIDER: "models.primary.provider"
+  HK_STOCK_AGENT_TEMPERATURE: "models.primary.parameters.temperature"
+  HK_STOCK_AGENT_MAX_TOKENS: "models.primary.parameters.max_tokens"
+
+  # Trading configuration
+  HK_STOCK_INITIAL_CAPITAL: "trading.initial_capital"
+  HK_STOCK_MAX_POSITIONS: "trading.max_positions"
+  HK_STOCK_RISK_PER_TRADE: "trading.risk_per_trade"
+
+# HK Stock Agent Capabilities
+capabilities:
+  # Market data access
+  market_data:
+    enabled: true
+    real_time_price: true
+    historical_data: true
+    technical_indicators: true
+
+  # Paper trading
+  paper_trading:
+    enabled: true
+    initial_capital: 1000000.0  # 1 million HKD
+    currency: "HKD"
+
+  # HK market specific features
+  hk_market:
+    ah_premium_monitoring: true
+    hk_connect_flow: true
+    hsi_correlation: true
+    lot_size_handling: true
+
+  # Technical analysis
+  technical_analysis:
+    indicators:
+      - MA  # Moving Averages (5, 10, 20, 50)
+      - RSI  # Relative Strength Index
+      - MACD  # Moving Average Convergence Divergence
+      - BB  # Bollinger Bands
+    signal_generation: true
+
+  # Portfolio management
+  portfolio:
+    enabled: true
+    position_tracking: true
+    pnl_calculation: true
+    performance_analysis: true
+
+# Trading Configuration
+trading:
+  # Exchange type: "paper" (内部模拟盘) or "futu_simulate" (富途模拟盘)
+  exchange_type: "paper"  # 改为 "futu_simulate" 启用富途
+  
+  # Paper trading settings
+  initial_capital: 1000000.0  # 1 million HKD
+  max_positions: 5  # Maximum concurrent positions
+  risk_per_trade: 0.05  # 5% of capital per trade
+
+  # 富途配置 (仅当exchange_type为"futu_simulate"时生效)
+  futu:
+    host: "127.0.0.1"  # FutuOpenD地址
+    port: 11111  # FutuOpenD端口
+    env: "SIMULATE"  # SIMULATE(模拟) 或 REAL(实盘)
+    market: "HK"  # HK(港股) US(美股) CN(A股)
+  
+  # 数据源配置
+  data_source:
+    provider: "futu"  # "futu" (富途真实数据) 或 "simulated" (模拟数据)
+    use_real_data: false  # 改为true使用真实市场数据
+
+  # Trading rules
+  rules:
+    min_lot: 1  # Minimum 1 lot per trade
+    max_lot: 100  # Maximum 100 lots per trade
+    allow_short: false  # No short selling in paper trading
+
+  # Market fees (automatically calculated)
+  fees:
+    stamp_duty: 0.0013  # 0.13%
+    trading_fee: 0.00005  # 0.005%
+    settlement_fee: 0.00002  # 0.002%
+    transaction_levy: 0.000027  # 0.0027%
+
+  # Trading hours (HK time)
+  market_hours:
+    open: "09:30"
+    lunch_start: "12:00"
+    lunch_end: "13:00"
+    close: "16:00"
+    timezone: "Asia/Hong_Kong"
+
+# Tool Configuration
+tools:
+  get_hk_stock_price:
+    enabled: true
+    description: "Get real-time price for HK stocks"
+
+  analyze_hk_stock:
+    enabled: true
+    description: "Analyze HK stock with technical indicators"
+
+  execute_hk_stock_buy:
+    enabled: true
+    description: "Execute buy order (paper trading)"
+
+  execute_hk_stock_sell:
+    enabled: true
+    description: "Execute sell order (paper trading)"
+
+  get_hk_portfolio:
+    enabled: true
+    description: "Get portfolio status"
+
+  search_hk_stocks:
+    enabled: true
+    description: "Search for HK stocks"
+
+# Agent Metadata
+metadata:
+  version: "1.0.0"
+  author: "StockBuddy Team"
+  created: "2025-11-18"
+  description: "Hong Kong Stock Trading Agent with paper trading and technical analysis"
+  tags: ["trading", "hk_stocks", "technical_analysis", "portfolio"]
+

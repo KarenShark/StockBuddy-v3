@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-popover: rgb(var(--popover));
+  --color-popover-foreground: rgb(var(--popover-foreground));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-destructive: rgb(var(--destructive));
+  --color-border: rgb(var(--border));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
+
+  --color-sidebar-ring: rgb(var(--sidebar-ring));
+  --color-sidebar-border: rgb(var(--sidebar-border));
+  --color-sidebar-accent-foreground: rgb(var(--sidebar-accent-foreground));
+  --color-sidebar-accent: rgb(var(--sidebar-accent));
+  --color-sidebar-primary-foreground: rgb(var(--sidebar-primary-foreground));
+  --color-sidebar-primary: rgb(var(--sidebar-primary));
+  --color-sidebar-foreground: rgb(var(--sidebar-foreground));
+  --color-sidebar: rgb(var(--sidebar));
+}
+
+:root {
+  /* OpenAI-inspired theme - Light mode */
+  --radius: 0.75rem;
+  --background: 255 255 255;
+  --foreground: 13 13 13;
+  --card: 255 255 255;
+  --card-foreground: 13 13 13;
+  --popover: 255 255 255;
+  --popover-foreground: 13 13 13;
+  --primary: 16 163 127;
+  --primary-foreground: 255 255 255;
+  --secondary: 247 247 248;
+  --secondary-foreground: 13 13 13;
+  --muted: 247 247 248;
+  --muted-foreground: 115 115 115;
+  --accent: 247 247 248;
+  --accent-foreground: 13 13 13;
+  --destructive: 239 68 68;
+  --border: 229 229 229;
+  --input: 229 229 229;
+  --ring: 16 163 127;
+  --sidebar: 247 247 248;
+  --sidebar-foreground: 13 13 13;
+  --sidebar-primary: 16 163 127;
+  --sidebar-primary-foreground: 255 255 255;
+  --sidebar-accent: 236 236 241;
+  --sidebar-accent-foreground: 13 13 13;
+  --sidebar-border: 229 229 229;
+  --sidebar-ring: 16 163 127;
+}
+
+.dark {
+  /* OpenAI-inspired theme - Dark mode */
+  --background: 33 33 33;
+  --foreground: 236 236 241;
+  --card: 44 44 46;
+  --card-foreground: 236 236 241;
+  --popover: 44 44 46;
+  --popover-foreground: 236 236 241;
+  --primary: 16 163 127;
+  --primary-foreground: 255 255 255;
+  --secondary: 52 53 65;
+  --secondary-foreground: 236 236 241;
+  --muted: 52 53 65;
+  --muted-foreground: 156 163 175;
+  --accent: 52 53 65;
+  --accent-foreground: 236 236 241;
+  --destructive: 239 68 68;
+  --border: 64 65 79;
+  --input: 64 65 79;
+  --ring: 16 163 127;
+  --sidebar: 23 23 23;
+  --sidebar-foreground: 236 236 241;
+  --sidebar-primary: 16 163 127;
+  --sidebar-primary-foreground: 255 255 255;
+  --sidebar-accent: 52 53 65;
+  --sidebar-accent-foreground: 236 236 241;
+  --sidebar-border: 64 65 79;
+  --sidebar-ring: 16 163 127;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  /* OpenAI-style smooth transitions */
+  button, a, [role="button"] {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  /* OpenAI-style chat area - narrower and centered */
+  .main-chat-area {
+    @apply w-full max-w-3xl mx-auto;
+  }
+
+  /* Simple border hover effect - no gradients */
+  .border-hover {
+    @apply border border-border transition-colors duration-200;
+
+    &:hover {
+      @apply border-primary/50;
+    }
+
+    &[data-active="true"] {
+      @apply border-primary;
+    }
+  }
+
+  /* OpenAI-style message bubble */
+  .message-bubble {
+    @apply rounded-2xl px-5 py-3 transition-all duration-200;
+  }
+
+  .message-user {
+    @apply bg-primary/10 ml-auto;
+  }
+
+  .message-assistant {
+    @apply bg-secondary;
+  }
+}
+
+/* OverlayScrollbars custom styles */
+.os-theme-dark {
+  --os-handle-bg: var(--color-neutral-200);
+  --os-handle-bg-hover: var(--color-neutral-300);
+  --os-handle-bg-active: var(--color-neutral-400);
+}

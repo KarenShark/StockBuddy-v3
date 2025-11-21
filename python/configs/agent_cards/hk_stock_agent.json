@@ -1,0 +1,116 @@
+{
+    "name": "HKStockAgent",
+    "display_name": "HK Stock Agent",
+    "url": "http://localhost:10007/",
+    "description": "Hong Kong stock market trading and analysis agent specialized in HK stock price monitoring, technical analysis, paper trading simulation, and portfolio management with HK market-specific features.",
+    "capabilities": {
+        "streaming": true,
+        "push_notifications": true
+    },
+    "skills": [
+        {
+            "id": "get_hk_stock_price",
+            "name": "HK Stock Price Lookup",
+            "description": "Get real-time stock prices for Hong Kong stocks by stock code.",
+            "examples": [
+                "What's the current price of Tencent (00700)?",
+                "Show me the price of Alibaba 09988",
+                "How much is China Mobile 00941 trading at?"
+            ],
+            "tags": ["price", "real-time", "HK stocks", "quote"]
+        },
+        {
+            "id": "analyze_hk_stock",
+            "name": "Technical Analysis",
+            "description": "Analyze HK stocks with technical indicators (MA, RSI, MACD, Bollinger Bands) and generate trading signals with confidence levels.",
+            "examples": [
+                "Analyze Tencent 00700's technical indicators",
+                "Give me trading signals for 09988",
+                "What are the technical indicators for 00941?"
+            ],
+            "tags": ["technical analysis", "indicators", "MA", "RSI", "MACD", "signals"]
+        },
+        {
+            "id": "execute_hk_stock_buy",
+            "name": "Buy HK Stocks (Paper Trading)",
+            "description": "Execute simulated buy orders for Hong Kong stocks with lot-based trading. Supports proper lot sizing and HK market fees calculation.",
+            "examples": [
+                "Buy 1 lot of Tencent 00700",
+                "Execute buy order for 2 lots of Alibaba 09988",
+                "Purchase 1 lot of China Mobile"
+            ],
+            "tags": ["buy", "trading", "paper trading", "simulation", "lot size"]
+        },
+        {
+            "id": "execute_hk_stock_sell",
+            "name": "Sell HK Stocks (Paper Trading)",
+            "description": "Execute simulated sell orders for Hong Kong stocks. Requires existing position in the portfolio.",
+            "examples": [
+                "Sell 1 lot of Tencent 00700",
+                "Execute sell order for my Alibaba position",
+                "Close my position in 00941"
+            ],
+            "tags": ["sell", "trading", "paper trading", "simulation", "close position"]
+        },
+        {
+            "id": "get_hk_portfolio",
+            "name": "Portfolio Management",
+            "description": "View current HK stock portfolio including all positions, cash balance, total assets, and P&L calculations.",
+            "examples": [
+                "Show me my HK stock portfolio",
+                "What's my current portfolio status?",
+                "Display all my HK stock positions and P&L"
+            ],
+            "tags": ["portfolio", "positions", "balance", "P&L", "performance"]
+        },
+        {
+            "id": "search_hk_stocks",
+            "name": "HK Stock Search",
+            "description": "Search for Hong Kong stocks by company name, stock code, or keywords to find matching stocks.",
+            "examples": [
+                "Search for Hong Kong bank stocks",
+                "Find stocks related to technology in HK",
+                "Search for Tencent stock code"
+            ],
+            "tags": ["search", "discovery", "stock lookup", "company search"]
+        },
+        {
+            "id": "ah_premium_analysis",
+            "name": "AH Premium Analysis",
+            "description": "Monitor and analyze A-H stock premium/discount for dual-listed companies between mainland A-shares and Hong Kong H-shares.",
+            "examples": [
+                "What's the AH premium for China Construction Bank?",
+                "Show me AH stock premium for dual-listed stocks",
+                "Analyze A-H price difference for 00939"
+            ],
+            "tags": ["AH premium", "dual-listed", "arbitrage", "A-shares", "H-shares"]
+        },
+        {
+            "id": "hk_connect_flow",
+            "name": "HK Connect Capital Flow",
+            "description": "Track Hong Kong Connect (Southbound) capital flows from mainland China into Hong Kong stocks.",
+            "examples": [
+                "What's the recent HK Connect capital flow?",
+                "Show me southbound capital flow trend",
+                "How much mainland money is flowing into HK stocks?"
+            ],
+            "tags": ["capital flow", "HK Connect", "southbound", "market sentiment"]
+        }
+    ],
+    "enabled": true,
+    "metadata": {
+        "version": "1.0.0",
+        "author": "StockBuddy Team",
+        "tags": [
+            "HK stocks",
+            "Hong Kong",
+            "trading",
+            "technical analysis",
+            "paper trading",
+            "portfolio",
+            "港股"
+        ],
+        "notes": "Paper trading mode only - no real money involved. Supports HK market-specific features including lot size handling, market fees, AH premium, and HK Connect flow monitoring."
+    }
+}
+
